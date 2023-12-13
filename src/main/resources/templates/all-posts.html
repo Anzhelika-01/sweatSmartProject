@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/head}"></head>
+
+<body>
+<header th:replace="~{/fragments/navigation}"></header>
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}"></div>
+
+        <div class="grid-container">
+
+            <div th:each="post, status : ${posts}">
+                <article class="tm-post post-container" th:id="'post-' + ${status.index}">
+                    <hr class="tm-hr-primary">
+                    <a th:href="@{'post/' + ${post.id}}" class="effect-lily tm-post-link tm-pt-60">
+                        <span class="position-absolute tm-new-badge">New</span>
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title title-in-corner" th:text="${post.title}">
+                            Title
+                        </h2>
+                    </a>
+                    <p class="tm-pt-20 cutoff-text" th:text="${post.text}">Text</p>
+                    <div class="d-flex justify-content-between tm-pt-30">
+                        <span class="tm-color-primary" th:text="${post.category}">Category</span>
+                        <span class="tm-color-primary"
+                              th:text="${T(bg.softuni.sweatsmartproject.config.DateUtils).formatLocalDate(post.creationDate)}">Creation date</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span th:text="${post.author}">Author</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="~{/fragments/footer}"></footer>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+</body>
+</html>

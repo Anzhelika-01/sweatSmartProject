@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row tm-mb-45">
+            <div class="col-12">
+                <hr class="tm-hr-primary tm-mb-55">
+            </div>
+        </div>
+
+        <div class="row tm-row tm-mb-120">
+            <div class="col-12">
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Make a post</h2>
+            </div>
+            <div class="col-lg-7 tm-contact-left">
+                <form th:action="@{/make-post}"
+                      th:method="POST"
+                      th:object="${postForm}"
+
+                      class="mb-5 ml-auto mr-0">
+
+                    <label for="category" class="col-sm-3 text-right category-label tm-color-primary">Category: </label>
+                    <select id="category" name="category" class="category-dropdown mr-0 ml-auto" th:value="${category}">
+                        <option value="HOME_WORKOUTS" class="category-option">Home workouts</option>
+                        <option value="FITNESS_WORKOUTS" class="category-option">Fitness workouts</option>
+                        <option value="DIETS_AND_NUTRITIOUS" class="category-option">Diets and nutritious</option>
+                        <option value="WEIGHT_MANAGEMENT" class="category-option">Weight management</option>
+                        <option value="MENTAL_HEALTH" class="category-option">Mental health</option>
+                        <option value="HACKS" class="category-option">Hacks</option>
+                    </select>
+
+                    <div class="form-group row mb-5">
+                        <label for="title" class="col-sm-3 col-form-label text-right tm-color-primary">Title</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control mr-0 ml-auto title-input" name="title" id="title" rows="2" placeholder="For what you will talk..." th:value="${title}"></textarea>
+                        </div>
+
+                    <p th:if="${#fields.hasErrors('title')}"
+                           class="errors alert alert-danger">
+                            Title is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group row mb-5">
+                        <label for="text" class="col-sm-3 col-form-label text-right tm-color-primary">Post</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control mr-0 ml-auto text-input" name="text" id="text" rows="20" placeholder="Share your knowledge with us..." th:value="${text}"></textarea>
+                        </div>
+
+                        <p th:if="${#fields.hasErrors('text')}"
+                           class="errors alert alert-danger">
+                            Text is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group row text-right">
+                        <div class="col-12">
+                            <button class="tm-btn tm-btn-primary tm-btn-small">Post</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer th:replace="~{/fragments/footer}">
+        </footer>
+
+    </main>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+
+</body>
+</html>

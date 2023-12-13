@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row">
+            <article class="col-12 col-md-6 tm-post">
+                <h2>Users List</h2>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <ul>
+                                    <li th:each="role : ${user.role}" th:text="${role.role}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <form th:action="@{/admins/change-username}" method="post">
+                                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                                    <label for="newUsername">New Username:</label>
+                                    <input type="text" id="newUsername" name="username" required/>
+                                    <button type="submit">Change Username</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/admins/add-role}" method="post">
+                                    <input type="hidden" name="userId" th:value="${user.id}" />
+                                    <button type="submit" name="role" value="ADMIN">Add Admin Role</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/admins/delete-role}" method="post">
+                                    <input type="hidden" name="userId" th:value="${user.id}" />
+                                    <button type="submit" name="role" value="ADMIN">Delete Admin Role</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </div>
+
+    </main>
+</div>
+<footer th:replace="~{/fragments/footer}">
+</footer>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+
+</body>
+</html>

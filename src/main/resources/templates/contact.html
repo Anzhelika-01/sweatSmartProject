@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+<div class="container-fluid">
+
+    <main class="tm-main">
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row tm-mb-45">
+            <div class="col-12">
+                <hr class="tm-hr-primary tm-mb-55">
+                <div class="gmap_canvas">
+                    <iframe width="100%" height="477" id="gmap_canvas"
+                            src="https://maps.google.com/maps?q=SoftUni,+Sofia,+Bulgaria&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="row tm-row tm-mb-120">
+            <div class="col-12">
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Contact Us</h2>
+            </div>
+            <div class="col-lg-7 tm-contact-left">
+
+                <form th:action="@{/contact}"
+                      th:method="POST"
+                      th:object="${messageModel}"
+
+                       class="mb-5 ml-auto mr-0 tm-contact-form">
+                    <div class="form-group tm-form-group">
+                        <label for="name" class="tm-form-label">Name</label>
+                        <div class="tm-input-wrapper">
+                            <input class="form-control tm-input" name="name" id="name" type="text" th:value="${name}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group tm-form-group">
+                        <label for="email" class="tm-form-label">Email</label>
+                        <div class="tm-input-wrapper">
+                            <input class="form-control tm-input" name="email" id="email" type="email" th:value="${email}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group tm-form-group">
+                        <label for="subject" class="tm-form-label">Subject</label>
+                        <div class="tm-input-wrapper">
+                            <input class="form-control tm-input" name="subject" id="subject" type="text" th:value="${subject}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group tm-form-group">
+                        <label for="message" class="tm-form-label">Message</label>
+                        <div class="tm-input-wrapper">
+                            <textarea class="form-control tm-input" name="message" id="message" rows="8" th:field="*{message}" required></textarea>
+                        </div>
+                    </div>
+                    <div th:if="${successMessage}" class="alert alert-success">
+                        <p th:text="${successMessage}"></p>
+                    </div>
+
+                    <div class="form-group row text-right">
+                        <div class="col-12">
+                            <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-5 tm-contact-right">
+                <address class="mb-4 tm-color-gray">
+                    Software University, Aleksandar Malinov Boulevard 78, 1799
+                </address>
+                <span class="d-block">
+                        Tel:
+                        <a href="tel:060-070-0980" class="tm-color-gray">+359-1234-56-781</a>
+                    </span>
+                <span class="mb-4 d-block">
+                        Email:
+                        <a href="mailto:info@company.com" class="tm-color-gray">sweatsmart@gmail.com</a>
+                    </span>
+                <p class="mb-5 tm-line-height-short">
+                    Don't hesitate to contact us
+                    between 09:00 and 18:00 o'clock
+                    for every health advice you need!
+                </p>
+                <ul class="tm-social-links">
+                    <li class="mb-2">
+                        <a href="https://facebook.com" class="d-flex align-items-center justify-content-center">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://twitter.com" class="d-flex align-items-center justify-content-center">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://youtube.com" class="d-flex align-items-center justify-content-center">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://instagram.com" class="d-flex align-items-center justify-content-center mr-0">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <footer th:replace="~{/fragments/footer}">
+        </footer>
+    </main>
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+</body>
+</html>

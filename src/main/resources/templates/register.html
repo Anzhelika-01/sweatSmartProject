@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row tm-mb-45">
+            <div class="col-12">
+                <hr class="tm-hr-primary tm-mb-55">
+            </div>
+        </div>
+
+        <div class="row tm-row tm-mb-120">
+            <div class="col-12">
+                <h2 class="col-sm-3 col-form-label text-right tm-color-primary">Register User</h2>
+                <form th:action="@{/register}" th:method="POST"
+                      th:object="${registerForm}"
+                      class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="email" class="col-sm-3 col-form-label text-right tm-color-primary">Email</label>
+                            <input id="email" name="email" type="email" class="form-control"
+                                   placeholder="Email"
+                                   th:value="${email}"/>
+
+                            <p th:if="${#fields.hasErrors('email')}"
+                               class="errors alert alert-danger">
+                                Email is required.
+                            </p>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="username"
+                                   class="col-sm-3 col-form-label text-right tm-color-primary">Username</label>
+                            <input id="username" name="username" type="text" class="form-control"
+                                   placeholder="Username"
+                                   th:value="${username}"/>
+
+                            <p th:if="${#fields.hasErrors('username')}"
+                               class="errors alert alert-danger">
+                                Username is required.
+                            </p>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="password"
+                                   class="col-sm-3 col-form-label text-right tm-color-primary">Password</label>
+                            <input id="password" name="password" type="password" class="form-control"
+                                   placeholder="Password"
+                                   th:value="${password}"/>
+
+                            <p th:if="${#fields.hasErrors('password')}"
+                               class="errors alert alert-danger">
+                                Password is required.
+                            </p>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="confirmPassword" class="col-sm-3 col-form-label text-right tm-color-primary">Confirm
+                                Password</label>
+                            <input id="confirmPassword" name="confirmPassword" type="password" class="form-control"
+                                   placeholder="Confirm Password"
+                                   th:value="${confirmPassword}"/>
+
+                            <p th:if="${#fields.hasErrors('confirmPassword')}"
+                               class="errors alert alert-danger">
+                                Passwords don't match.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-right">
+                        <div class="col-12">
+                            <button class="tm-btn tm-btn-primary tm-btn-small">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer th:replace="~{/fragments/footer}">
+        </footer>
+
+
+    </main>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row tm-mb-45">
+            <div class="col-12">
+                <hr class="tm-hr-primary tm-mb-55">
+            </div>
+        </div>
+
+        <div class="row tm-row tm-mb-120">
+            <div class="container">
+                <h2 class="col-sm-3 col-form-label text-right tm-color-primary">Login User</h2>
+                <form th:action="@{/login}" th:method="POST"
+                      class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+                    <div class="row">
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="username" class="text-black-50">Username</label>
+                            <input id="username" name="username"  type="text" min="4" max="20" class="form-control"
+                                   th:value="${username}"
+                                   placeholder="Username"/>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="password" class="text-black-50">Password</label>
+                            <input id="password" name="password" th:value="${password}" min="4"
+                                   max="20" type="password" class="form-control"
+                                   placeholder="Password"/>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-primary" role="alert" th:if="${bad_credentials}">
+                        Invalid username or password.
+                    </div>
+
+                    <div class="form-group row text-right">
+                        <div class="button-holder d-flex">
+                            <input type="submit" class="btn" value="Login"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer th:replace="~{/fragments/footer}">
+        </footer>
+
+    </main>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+
+</body>
+</html>

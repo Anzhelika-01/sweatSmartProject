@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row tm-mb-45">
+            <div class="col-12">
+                <hr class="tm-hr-primary tm-mb-55">
+            </div>
+        </div>
+
+        <div class="calculator-container">
+
+            <div class="row tm-row tm-mb-120">
+                <div class="col-12">
+                    <h2 class="tm-color-primary tm-post-title tm-mb-60">Calculate Calorie</h2>
+                </div>
+                <div class="col-lg-7 tm-contact-left">
+
+                    <form th:method="POST" th:action="@{/calorie-calculator}"
+                          th:object="${calorieCalculatorForm}">
+
+                        <label for="sex">Sex:</label>
+                        <select id="sex" name="sex" th:value="${sex}">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+
+                        <br>
+                        <label for="weight">Weight (kg):</label>
+                        <input type="number" id="weight" name="weight" required
+                               th:value="${weight}"/>
+
+                        <p th:if="${#fields.hasErrors('weight')}"
+                           class="errors alert alert-danger">
+                            The weight must be between 10kg and 300kg.
+                        </p>
+
+                        <br>
+                        <label for="height">Height (cm):</label>
+                        <input type="number" id="height" name="height" required
+                               th:value="${height}">
+
+                        <p th:if="${#fields.hasErrors('height')}"
+                           class="errors alert alert-danger">
+                            The height must be between 20cm and 250cm.
+                        </p>
+
+                        <br>
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" required
+                               th:value="${age}">
+
+                        <p th:if="${#fields.hasErrors('age')}"
+                           class="errors alert alert-danger">
+                            The age must be between 7 and 100.
+                        </p>
+
+                        <br>
+                        <label for="activityLevel">Activity Level:</label>
+                        <select id="activityLevel" name="activityLevel" th:value="${activityLevel}">
+
+                            <option value="Sedentary">Little or no exercise</option>
+                            <option value="Lightly active">Light exercise/sports 1-3 days/week</option>
+                            <option value="Moderately active">Moderate exercise/sports 3-5 days/week</option>
+                            <option value="Very active">Hard exercise/sports 6-7 days a week</option>
+                            <option value="Extra active">Very hard exercise/sports or physical job</option>
+
+                        </select>
+                        <br>
+                        <button type="submit" name="submitBtn">Calculate Calories</button>
+
+                        <h1 class="calories-result">Calories Needed Per Day: <span th:text="${caloriesPerDay}"></span>
+                        </h1>
+
+                    </form>
+
+                    <footer th:replace="~{/fragments/footer}">
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+
+</body>
+</html>

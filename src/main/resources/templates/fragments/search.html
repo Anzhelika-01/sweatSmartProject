@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="tm-header-menu">
+    <nav class="tm-nav-menu" id="tm-nav">
+        <button class="navbar-toggler" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="dropdown">
+            <button class="dropbtn">Menu</button>
+            <div class="dropdown-content">
+                <div class="tm-nav-item" sec:authorize="isAnonymous()">
+                    <button class="tm-nav-link blue-button" onclick="location.href='/login'">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span class="blue-text">Login</span>
+                    </button>
+                </div>
+                <div class="tm-nav-item" sec:authorize="isAnonymous()">
+                    <button class="tm-nav-link blue-button" onclick="location.href='/register'">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="blue-text">Register</span>
+                    </button>
+                </div>
+                <div class="tm-nav-item" sec:authorize="isAuthenticated()">
+                    <form th:method="post" th:action="@{/logout}">
+                        <button class="tm-nav-link blue-button" type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="blue-text">Logout</span>
+                        </button>
+                    </form>
+                </div>
+                <div class="tm-nav-item">
+                    <button class="tm-nav-link blue-button" onclick="location.href='/calorie-calculator'">
+                        <i class="fas fa-calculator"></i>
+                        <span class="blue-text">Calorie Calculator</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tm-search-form">
+            <form th:method="GET" class="form-inline">
+                <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..."
+                       aria-label="Search">
+                <button class="tm-search-button" type="submit">
+                    <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+    </nav>
+</div>
