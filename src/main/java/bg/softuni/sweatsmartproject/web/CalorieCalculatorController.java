@@ -35,8 +35,6 @@ public class CalorieCalculatorController extends BaseController{
                                     BindingResult result, RedirectAttributes redirectAttributes,
                                     Model model) {
 
-        System.out.println(calorieCalculatorForm);
-
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("calorieCalculatorForm", calorieCalculatorForm)
                     .addFlashAttribute(BINDING_RESULT_PATH + "calorieCalculatorForm", result);
