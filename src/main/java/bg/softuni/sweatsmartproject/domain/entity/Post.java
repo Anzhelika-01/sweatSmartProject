@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -23,8 +26,15 @@ public class Post extends BaseEntity {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
-    @Column
-    private int likes;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Like> likes = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "post_likes",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> likedByUsers = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private Category category;
@@ -76,13 +86,49 @@ public class Post extends BaseEntity {
         return this;
     }
 
-    public Post setLikes(int likes) {
+    public Post setLikes(Set<Like> likes) {
         this.likes = likes;
         return this;
     }
 
-    public int getLikes() {
+    public Set<Like> getLikes() {
         return likes;
+    }
+
+    public int getLikeCount() {
+        return likes.size();
+    }
+
+    public void addLike(User user) {
+        if (!userLikedPost(user)) {
+            Like like = new Like(user, this);
+            likes.add(like);
+            user.getLikedPosts().add(like);
+        }
+    }
+
+    public void removeLike(User user) {
+        if (userLikedPost(user)) {
+            Like likeToRemove = likes.stream()
+                    .filter(like -> like.getUser().equals(user))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Like not found for user"));
+
+            likes.remove(likeToRemove);
+            user.getLikedPosts().remove(likeToRemove);
+        }
+    }
+
+    private boolean userLikedPost(User user) {
+        return likes.stream().anyMatch(like -> like.getUser().equals(user));
+    }
+
+    public Set<User> getLikedByUsers() {
+        return likedByUsers;
+    }
+
+    public void setLikedByUsers(Set<User> likedByUsers) {
+        this.likedByUsers = likedByUsers;
     }
 
     @Override

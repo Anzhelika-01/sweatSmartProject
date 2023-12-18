@@ -21,8 +21,6 @@ public class PostForm {
     @NotNull
     private String text;
 
-    private int likes;
-
     public String getCategory() {
         return category;
     }

@@ -4,6 +4,7 @@ import bg.softuni.sweatsmartproject.domain.dto.model.CategoryModel;
 import bg.softuni.sweatsmartproject.domain.dto.model.PostModel;
 import bg.softuni.sweatsmartproject.domain.dto.view.PostViewDto;
 import bg.softuni.sweatsmartproject.domain.dto.wrapper.PostForm;
+import bg.softuni.sweatsmartproject.domain.entity.Like;
 import bg.softuni.sweatsmartproject.domain.entity.Post;
 import bg.softuni.sweatsmartproject.domain.entity.User;
 import bg.softuni.sweatsmartproject.repository.PostRepo;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -23,9 +25,7 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepo postRepo;
-
     private final ModelMapper modelMapper;
-
     private final UserRepo userRepo;
     private final CategoryService categoryService;
 
@@ -57,13 +57,35 @@ public class PostService {
         this.postRepo.saveAndFlush(post);
     }
 
-    public void incrementLikeCount(UUID postId) {
+    @Transactional
+    public long incrementLikeCount(UUID postId, User user) {
         final Post post = postRepo.findById(postId)
                 .orElseThrow(() -> new RuntimeException("Post not found with id: " + postId));
 
-        post.setLikes(post.getLikes() + 1);
+        System.out.println(userLikedPost(postId, user));
+
+        if (!userLikedPost(postId, user)) {
+            post.addLike(user);
+        } else {
+            post.removeLike(user);
+        }
 
         postRepo.save(post);
+        return post.getLikeCount();
+    }
+
+    public boolean userLikedPost(UUID postId, User user) {
+        Post post = postRepo.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + postId));
+
+        return post.getLikedByUsers().contains(user);
+    }
+
+    public long getLikeCount(UUID postId) {
+        Post post = postRepo.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + postId));
+
+        return post.getLikes().size();
     }
 
     public List<PostViewDto> getAllPosts() {

@@ -9,9 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @NoArgsConstructor
@@ -40,6 +38,9 @@ public class User extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private List<UserRole> role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Like> likedPosts = new HashSet<>();
+
     public User setUsername(String username) {
         this.username = username;
         return this;
@@ -62,6 +63,11 @@ public class User extends BaseEntity {
 
     public User setPosts(List<Post> posts) {
         this.posts = posts;
+        return this;
+    }
+
+    public User setLikedPosts(Set<Like> likedPosts) {
+        this.likedPosts = likedPosts;
         return this;
     }
 

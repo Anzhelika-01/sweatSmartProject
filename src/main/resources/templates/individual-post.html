@@ -15,17 +15,19 @@
                 <h2 class="pt-2 tm-color-primary tm-post-title" th:text="${post.title}">Post Title</h2>
                 <p class="tm-post-text" th:text="${post.text}">Post content goes here</p>
 
+                <!-- Like section -->
                 <div class="like-section">
                     <form th:action="@{/post/like}" method="POST">
-                        <input type="hidden" name="postId" th:value="${post.id}"/>
+                        <input type="hidden" name="postId" th:value="${post.id}" />
                         <button type="submit" class="like-button">❤</button>
                     </form>
-                    <span class="like-count" th:text="${post.likes}"></span>
-                    <span th:if="${post.likes == 1}"> like</span>
-                    <span th:if="${post.likes != 1}"> likes</span>
+                    <span class="like-count" th:text="${likeCount}"></span>
+                    <span th:if="${likeCount == 1}"> like</span>
+                    <span th:if="${likeCount != 1}"> likes</span>
                 </div>
 
 
+                <!-- Comments section -->
                 <div th:if="${comments != null and not #lists.isEmpty(comments)}">
                     <div th:each="comment : ${comments}">
                         <div>

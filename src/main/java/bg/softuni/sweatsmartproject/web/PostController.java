@@ -1,20 +1,19 @@
 package bg.softuni.sweatsmartproject.web;
 
 import bg.softuni.sweatsmartproject.domain.dto.model.AppUserDetails;
-import bg.softuni.sweatsmartproject.domain.dto.model.MessageModel;
 import bg.softuni.sweatsmartproject.domain.dto.view.CommentsViewDto;
 import bg.softuni.sweatsmartproject.domain.dto.view.PostViewDto;
 import bg.softuni.sweatsmartproject.domain.dto.wrapper.CommentForm;
 import bg.softuni.sweatsmartproject.domain.dto.wrapper.PostForm;
 import bg.softuni.sweatsmartproject.domain.entity.Post;
+import bg.softuni.sweatsmartproject.domain.entity.User;
 import bg.softuni.sweatsmartproject.repository.CommentRepo;
 import bg.softuni.sweatsmartproject.repository.PostRepo;
+import bg.softuni.sweatsmartproject.repository.UserRepo;
 import bg.softuni.sweatsmartproject.service.CommentService;
 import bg.softuni.sweatsmartproject.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,25 +36,30 @@ public class PostController extends BaseController {
     private final CommentService commentService;
 
     private final CommentRepo commentRepo;
+
+    private final UserRepo userRepo;
     public static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult.";
 
 
     @Autowired
-    public PostController(PostService postService, PostRepo postRepo, CommentService commentService, CommentRepo commentRepo) {
+    public PostController(PostService postService, PostRepo postRepo, CommentService commentService, CommentRepo commentRepo, UserRepo userRepo) {
         this.postService = postService;
         this.postRepo = postRepo;
         this.commentService = commentService;
         this.commentRepo = commentRepo;
+        this.userRepo = userRepo;
     }
 
     @GetMapping("/post/{postId}")
     public ModelAndView viewPost(@PathVariable UUID postId, Model model) {
-
         final Post post = postRepo.getPostById(postId);
         model.addAttribute("post", post);
 
         final List<CommentsViewDto> comments = commentService.getAllComments(post.getTitle());
         model.addAttribute("comments", comments);
+
+        long likeCount = postService.getLikeCount(postId);
+        model.addAttribute("likeCount", likeCount);
 
         return super.view("individual-post");
     }
@@ -114,10 +118,17 @@ public class PostController extends BaseController {
     }
 
     @PostMapping("/post/like")
-    public ModelAndView likePost(@RequestParam UUID postId) {
-        postService.incrementLikeCount(postId);
-        System.out.println("Post liked successfully");
-        return new ModelAndView("redirect:/post/" + postId);
+    public ModelAndView likePost(@RequestParam UUID postId, @AuthenticationPrincipal AppUserDetails userDetails, Model model) {
+
+        final User currentUser = userRepo.findUserByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Current user not found"));
+
+        long likeCount = postService.incrementLikeCount(postId, currentUser);
+
+        // Add the updated like count to the model
+        model.addAttribute("likeCount", likeCount);
+
+        return super.redirect("/post/" + postId);
     }
 
     @ModelAttribute(name = "postForm")
