@@ -37,7 +37,7 @@ public class CommentService {
         this.postRepo = postRepo;
     }
 
-    public void addComment(CommentForm commentForm, String username, Post post){
+    public void addComment(CommentForm commentForm, String username, Post post) {
 
         final User user = this.userRepo.findUserByUsername(username)
                 .orElseThrow(NoSuchElementException::new);
@@ -55,7 +55,7 @@ public class CommentService {
         this.commentRepo.saveAndFlush(comment);
     }
 
-    public List<CommentsViewDto> getAllComments(String title){
+    public List<CommentsViewDto> getAllComments(String title) {
 
         List<Comment> comments = this.commentRepo.getCommentsByPost_Title(title);
 

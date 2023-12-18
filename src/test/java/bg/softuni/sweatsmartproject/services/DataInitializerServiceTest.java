@@ -49,25 +49,22 @@ class DataInitializerServiceTest {
 
     @Test
     void testInitAdmin() {
-        // Arrange
-        String adminEmail = "kotevaanzhelika@gmail.com";
-        String adminUsername = "akoteva";
-        String adminPassword = "1234";
+        final String adminEmail = "kotevaanzhelika@gmail.com";
+        final String adminUsername = "akoteva";
+        final String adminPassword = "1234";
 
         when(userRoleRepo.findAll()).thenReturn(Collections.singletonList(new UserRole().setRole(RoleEnum.ADMIN)));
         when(passwordEncoder.encode(adminPassword)).thenReturn("encodedPassword");
 
-        // Act
         dataInitializerService.initAdmin();
 
-        // Assert
         verify(userRoleRepo, times(1)).findAll();
         verify(userRepo, times(1)).saveAndFlush(any(User.class));
 
-        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        final ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepo).saveAndFlush(userCaptor.capture());
 
-        User savedUser = userCaptor.getValue();
+        final User savedUser = userCaptor.getValue();
         assertEquals(adminEmail, savedUser.getEmail());
         assertEquals(adminUsername, savedUser.getUsername());
         assertEquals("encodedPassword", savedUser.getPassword());
@@ -77,7 +74,7 @@ class DataInitializerServiceTest {
 
     @Test
     void testDbInit() {
-        List<UserRole> userRoles = Arrays.asList(
+        final List<UserRole> userRoles = Arrays.asList(
                 new UserRole().setRole(RoleEnum.USER),
                 new UserRole().setRole(RoleEnum.ADMIN)
         );
@@ -87,18 +84,16 @@ class DataInitializerServiceTest {
 
         when(userRepo.count()).thenReturn(0L);
 
-        // Act
         dataInitializerService.dbInit();
 
-        // Assert
         verify(userRoleService, times(1)).dbInit();
         verify(userRepo, times(1)).count();
         verify(userRepo, times(1)).saveAndFlush(any(User.class));
 
-        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        final ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepo).saveAndFlush(userCaptor.capture());
 
-        User savedUser = userCaptor.getValue();
+        final User savedUser = userCaptor.getValue();
 
         assertTrue(savedUser.getRole().stream().anyMatch(role -> role.getRole().equals(RoleEnum.USER)));
         assertTrue(savedUser.getRole().stream().anyMatch(role -> role.getRole().equals(RoleEnum.ADMIN)));

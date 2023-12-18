@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{/fragments/head}">
-    <title>Home</title></head>
+    <title>Home</title>
+</head>
 
 <body>
 
@@ -15,173 +16,76 @@
         <div th:replace="~{/fragments/search}">
         </div>
 
-        <div class="row tm-row">
-            <article class="col-12 col-md-6 tm-post">
-                <hr class="tm-hr-primary">
-                <a th:href="@{post}" class="effect-lily tm-post-link tm-pt-60">
-                    <span class="position-absolute tm-new-badge">New</span>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Title</h2>
-                </a>
-                <p class="tm-pt-30">
-                    Text
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Category</span>
-                    <span class="tm-color-primary">Creation date</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>Author</span>
-                </div>
-            </article>
-            <article class="col-12 col-md-6 tm-post">
-                <hr class="tm-hr-primary">
-                <a th:href="@{post}" class="effect-lily tm-post-link tm-pt-60">
-                    <div class=" tm-post-link-inner">
-                        <img th:src="@{images}" alt="Image" class="img-fluid">
-                    </div>
-                    <span class="position-absolute tm-new-badge">New</span>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Multi-purpose blog template</h2>
-                </a>
-                <p class="tm-pt-30">
-                    <a rel="nofollow" th:href="@{https://templatemo.com/tm-553-xtra-blog}" target="_blank">Xtra Blog</a> is a
-                    multi-purpose HTML CSS template from TemplateMo website.
-                    Blog list, single post, about, contact pages are included. Left sidebar fixed width and content area
-                    is a fluid full-width.
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Creative . Design . Business</span>
-                    <span class="tm-color-primary">June 16, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>48 comments</span>
-                    <span>by Admin Sam</span>
-                </div>
-            </article>
-            <article class="col-12 col-md-6 tm-post">
-                <hr class="tm-hr-primary">
-                <a th:href="@{post}" class="effect-lily tm-post-link tm-pt-20">
-                    <div class="tm-post-link-inner">
-                        <img th:src="@{images}" alt="Image" class="img-fluid">
-                    </div>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">How can you apply Xtra Blog</h2>
-                </a>
-                <p class="tm-pt-30">
-                    You are <u>allowed</u> to convert this template as any kind of CMS theme or template for your custom
-                    website builder.
-                    You can also use this for your clients. Thank you for choosing us.
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Music . Audio</span>
-                    <span class="tm-color-primary">June 11, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>24 comments</span>
-                    <span>by John Walker</span>
-                </div>
-            </article>
-            <article class="col-12 col-md-6 tm-post">
-                <hr class="tm-hr-primary">
-                <a th:href="@{post}" class="effect-lily tm-post-link tm-pt-20">
-                    <div class="tm-post-link-inner">
-                        <img th:src="@{images}" alt="Image" class="img-fluid">
-                    </div>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">A little restriction to apply</h2>
-                </a>
-                <p class="tm-pt-30">
-                    You are <u>not allowed</u> to re-distribute this template as a downloadable ZIP file on any template
-                    collection
-                    website. This is strongly prohibited as we worked hard for this template. Please contact TemplateMo
-                    for more information.
-                    <br>For example, <a th:href="@{https://www.free-css.com/free-css-templates/page272/xtra-blog}"
-                                        target="_blank">Free-CSS</a> redistributed this Xtra Blog template on their
-                    website without asking any permission. It is an illegal act by Free-CSS website doing an
-                    unauthorized reposting.</p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Artworks . Design</span>
-                    <span class="tm-color-primary">June 4, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>72 comments</span>
-                    <span>by Admin Sam</span>
-                </div>
-            </article>
-            <article class="col-12 col-md-6 tm-post">
-                <hr class="tm-hr-primary">
-                <a th:href="@{post}" class="effect-lily tm-post-link tm-pt-20">
-                    <div class="tm-post-link-inner">
-                        <img th:src="@{images}" alt="Image" class="img-fluid">
-                    </div>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Color hexa values of Xtra Blog</h2>
-                </a>
-                <p class="tm-pt-30">
-                    If you wish to kindly support us, please contact us or contribute a small PayPal amount to info [at]
-                    templatemo.com that is helpful for us.
-                    <br>
-                    Title #099 New #0CC <br>
-                    <span class="tm-color-primary">Text #999 Line #CCC Next #0CC Prev #F0F0F0</span>
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Creative . Video . Audio</span>
-                    <span class="tm-color-primary">May 31, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>84 comments</span>
-                    <span>by Admin Sam</span>
-                </div>
-            </article>
-            <article class="col-12 col-md-6 tm-post">
-                <hr class="tm-hr-primary">
-                <a th:href="@{post}" class="effect-lily tm-post-link tm-pt-20">
-                    <div class="tm-post-link-inner">
-                        <img th:src="@{images}" alt="Image" class="img-fluid">
-                    </div>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Donec convallis varius risus</h2>
-                </a>
-                <p class="tm-pt-30">
-                    Quisque id ipsum vel sem maximus vulputate sed quis velit. Nunc vel turpis eget orci elementum
-                    cursus vitae in eros. Quisque vulputate nulla ut dolor consectetur luctus.
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Visual . Artworks</span>
-                    <span class="tm-color-primary">June 16, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>96 comments</span>
-                    <span>by Admin Sam</span>
-                </div>
-            </article>
+        <div class="header">
+            <h1 style="font-family: 'Arial', sans-serif; color: #333; font-size: 2em; margin-bottom: 10px;">
+                Welcome to <span style="color: #00b4d8;">SweatSmart</span>
+            </h1>
+            <p style="color: #666; font-size: 1.2em;">Your Ultimate Wellness Hub</p>
         </div>
-        <div class="row tm-row tm-mt-100 tm-mb-75">
-            <div class="tm-prev-next-wrapper">
-                <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
-                <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
-            </div>
-            <div class="tm-paging-wrapper">
-                <span class="d-inline-block mr-3">Page</span>
-                <nav class="tm-paging-nav d-inline-block">
-                    <ul>
-                        <li class="tm-paging-item active">
-                            <a href="#" class="mb-2 tm-btn tm-paging-link">1</a>
-                        </li>
-                        <li class="tm-paging-item">
-                            <a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
-                        </li>
-                        <li class="tm-paging-item">
-                            <a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
-                        </li>
-                        <li class="tm-paging-item">
-                            <a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
-                        </li>
-                    </ul>
-                </nav>
+
+
+        <div class="main-content">
+
+            <div class="wellness-content">
+                <div class="section">
+                    <h2>Embrace a Healthier You 🌿</h2>
+                    <p>At SweatSmart, we believe that true well-being is a journey, not a destination. Step into a world
+                        where vibrant health meets mindful living, and embark on a transformative adventure toward a
+                        happier, healthier you.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Explore Our Health-Oasis 🌟</h2>
+                    <p>Dive into a treasure trove of articles crafted to inspire, inform, and empower. From nutrition
+                        tips that tantalize your taste buds to fitness routines that invigorate your spirit, we've got
+                        your well-being covered from head to toe.</p>
+                    <img class="image" src="/images/homePage1.png" alt="Health Image 1" style="margin-bottom: 20px;">
+                </div>
+
+                <div class="section">
+                    <h2>Nourish Your Body, Feed Your Soul 💪</h2>
+                    <p>Whether you're a seasoned gym-goer or a fitness novice, our expertly curated workout routines
+                        cater to all levels. Unleash your inner warrior with dynamic exercises designed to sculpt, tone,
+                        and energize. Fitness is not just a routine; it's a lifestyle, and we're here to make it
+                        exhilarating.</p>
+                </div>
+                <div class="section">
+                    <h2>Empower Your Fitness Journey 🍏</h2>
+                    <p>Discover delectable recipes that redefine the relationship between health and flavor. Our
+                        culinary experts whip up a feast of nutritious delights that will make your taste buds dance
+                        with joy. Say goodbye to bland diets and hello to a world where healthy eating is a
+                        celebration.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Mindfulness for Inner Harmony 🌈</h2>
+                    <p>True health extends beyond the physical. Join us on a journey of self-discovery and mindfulness
+                        practices that bring tranquility to your mind and spirit. From meditation guides to
+                        stress-busting techniques, find your sanctuary in a chaotic world.</p>
+                    <img class="image" src="/images/homePage2.jpg" alt="Health Image 2" style="margin-bottom: 20px;">
+                </div>
+
+                <div class="section">
+                    <h2>Connect and Thrive 🌐</h2>
+                    <p>Become part of a vibrant community of health enthusiasts. Share your stories, exchange tips, and
+                        celebrate victories together. Our blog is more than a space for information – it's a supportive
+                        ecosystem for your well-being journey.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Stay Informed, Stay Inspired 📌</h2>
+                    <p>Our team of health experts and enthusiasts work tirelessly to bring you the latest trends,
+                        evidence-based insights, and motivational stories. Subscribe to our newsletter for a weekly dose
+                        of inspiration delivered straight to your inbox.</p>
+                    <p>Embark on a journey to radiant health with [Your Blog Name]. Because here, wellness is not just a
+                        destination; it's a way of life.</p>
+                    <p>Start your transformative adventure today! 🚀</p>
+                    <img class="image" src="/images/homePage3.png" alt="Health Image 2" style="margin-bottom: 20px;">
+                </div>
+
             </div>
         </div>
+
         <footer th:replace="~{/fragments/footer}">
         </footer>
     </main>

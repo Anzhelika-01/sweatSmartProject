@@ -14,6 +14,6 @@ import lombok.ToString;
 public class ValidationError {
 
     private int status;
-    private String message;
 
+    private String message;
 }

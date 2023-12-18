@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "comments")
-public class Comment extends BaseEntity{
+public class Comment extends BaseEntity {
 
     @Column
     public LocalDate creationDate;
@@ -68,7 +68,7 @@ public class Comment extends BaseEntity{
         return super.getId();
     }
 
-    public CommentsViewDto toDto(){
+    public CommentsViewDto toDto() {
         return CommentsViewDto.builder()
                 .id(this.getId())
                 .author(this.author.getUsername())

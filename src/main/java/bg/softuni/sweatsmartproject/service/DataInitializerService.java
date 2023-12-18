@@ -38,6 +38,7 @@ public class DataInitializerService {
             initAdmin();
         }
     }
+
     public void initAdmin() {
         final User user = new User().builder().
                 email("kotevaanzhelika@gmail.com")
@@ -48,6 +49,7 @@ public class DataInitializerService {
 
         this.userRepo.saveAndFlush(user);
     }
+
     public boolean isDbInit() {
         return this.userRepo.count() > 0;
     }

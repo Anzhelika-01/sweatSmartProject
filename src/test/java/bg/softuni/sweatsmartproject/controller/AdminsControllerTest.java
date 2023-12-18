@@ -1,30 +1,18 @@
 package bg.softuni.sweatsmartproject.controller;
 
 import bg.softuni.sweatsmartproject.domain.dto.model.UserModel;
-import bg.softuni.sweatsmartproject.domain.dto.view.UserInfoWithoutPassDto;
-import bg.softuni.sweatsmartproject.service.UserRoleService;
 import bg.softuni.sweatsmartproject.service.UserService;
 import bg.softuni.sweatsmartproject.web.AdminsController;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.TestExecutionEvent;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -39,12 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AdminsControllerTest {
 
-
     @Mock
     private UserService userService;
-
-    @Mock
-    private UserRoleService userRoleService;
 
     @Mock
     private Model model;
@@ -64,7 +48,7 @@ public class AdminsControllerTest {
 
         when(userService.getAllUsersWithInfo()).thenReturn(Collections.emptyList());
 
-        ModelAndView modelAndView = adminsController.getAdmins(model);
+        final ModelAndView modelAndView = adminsController.getAdmins(model);
 
         assertEquals("admins", modelAndView.getViewName());
     }
@@ -73,8 +57,8 @@ public class AdminsControllerTest {
     public void testPostChangeUsername() throws Exception {
         setup();
 
-        UUID userId = UUID.randomUUID();
-        String newUsername = "newUsername";
+        final UUID userId = UUID.randomUUID();
+        final String newUsername = "newUsername";
 
         when(userService.findById(userId)).thenReturn(createDummyUserModel());
         when(userService.changeUsername(newUsername, createDummyUserModel())).thenReturn(true);
@@ -110,10 +94,10 @@ public class AdminsControllerTest {
     public void testDeleteRole() throws Exception {
         setup();
 
-        UUID userId = UUID.randomUUID();
-        String role = "ROLE_USER";
+        final UUID userId = UUID.randomUUID();
+        final String role = "ROLE_USER";
 
-        UserModel dummyUserModel = createDummyUserModel();
+        final UserModel dummyUserModel = createDummyUserModel();
 
         when(userService.findById(userId)).thenReturn(dummyUserModel);
 
@@ -126,15 +110,8 @@ public class AdminsControllerTest {
         verify(userService).changeRoles(dummyUserModel, role, false);
     }
 
-    private UserInfoWithoutPassDto createDummyUser() {
-        UserInfoWithoutPassDto dummyUser = new UserInfoWithoutPassDto();
-        dummyUser.setId(UUID.randomUUID());
-        dummyUser.setUsername("dummyUsername");
-        return dummyUser;
-    }
-
     private UserModel createDummyUserModel() {
-        UserModel dummyUser = new UserModel();
+        final UserModel dummyUser = new UserModel();
         dummyUser.setId(UUID.randomUUID());
         dummyUser.setUsername("dummyUsername");
         return dummyUser;

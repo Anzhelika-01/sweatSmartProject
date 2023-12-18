@@ -1,6 +1,5 @@
 package bg.softuni.sweatsmartproject.config;
 
-
 import bg.softuni.sweatsmartproject.domain.interceptor.LoginInterceptor;
 import bg.softuni.sweatsmartproject.domain.interceptor.RenameInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,7 +9,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserRoleModel{
+public class UserRoleModel {
     private UUID id;
 
     private String role;

@@ -19,7 +19,7 @@ public class MessageService {
         this.modelMapper = modelMapper;
     }
 
-    public void addMessage(MessageModel messageModel){
+    public void addMessage(MessageModel messageModel) {
 
         final Message message = this.modelMapper.map(messageModel, Message.class);
 

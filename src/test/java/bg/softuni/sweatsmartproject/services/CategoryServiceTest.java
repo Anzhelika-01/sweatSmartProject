@@ -87,7 +87,7 @@ public class CategoryServiceTest {
         when(modelMapper.map(any(Category.class), eq(CategoryViewDto.class)))
                 .thenReturn(new CategoryViewDto(), new CategoryViewDto());
 
-        List<CategoryViewDto> result = categoryService.getAll();
+        final List<CategoryViewDto> result = categoryService.getAll();
 
         assertEquals(2, result.size());
     }
@@ -98,14 +98,14 @@ public class CategoryServiceTest {
 
         when(categoryRepo.findCategoryByName(CategoryEnum.HOME_WORKOUTS)).thenReturn(category);
 
-        CategoryModel categoryModel = CategoryModel.builder()
+        final CategoryModel categoryModel = CategoryModel.builder()
                 .id(UUID.randomUUID())
                 .name(CategoryEnum.HOME_WORKOUTS)
                 .build();
 
         when(modelMapper.map(category, CategoryModel.class)).thenReturn(categoryModel);
 
-        CategoryModel result = categoryService.getCategory("HOME_WORKOUTS");
+        final CategoryModel result = categoryService.getCategory("HOME_WORKOUTS");
 
         assertEquals(CategoryEnum.HOME_WORKOUTS, result.getName());
     }

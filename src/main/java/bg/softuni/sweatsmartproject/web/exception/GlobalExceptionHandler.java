@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler{
+public class GlobalExceptionHandler {
 
     @ExceptionHandler({Throwable.class})
-    public String handleSqlException(Throwable e){
+    public String handleSqlException(Throwable e) {
         return "error";
     }
 }

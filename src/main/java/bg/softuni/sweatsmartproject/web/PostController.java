@@ -13,6 +13,8 @@ import bg.softuni.sweatsmartproject.service.CommentService;
 import bg.softuni.sweatsmartproject.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,7 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping
-public class PostController extends BaseController{
+public class PostController extends BaseController {
 
     private final PostService postService;
 
@@ -34,7 +36,7 @@ public class PostController extends BaseController{
 
     private final CommentService commentService;
 
-    private  final CommentRepo commentRepo;
+    private final CommentRepo commentRepo;
     public static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult.";
 
 
@@ -49,26 +51,26 @@ public class PostController extends BaseController{
     @GetMapping("/post/{postId}")
     public ModelAndView viewPost(@PathVariable UUID postId, Model model) {
 
-        Post post = postRepo.getPostById(postId);
+        final Post post = postRepo.getPostById(postId);
         model.addAttribute("post", post);
 
-        List<CommentsViewDto> comments = commentService.getAllComments(post.getTitle());
+        final List<CommentsViewDto> comments = commentService.getAllComments(post.getTitle());
         model.addAttribute("comments", comments);
 
         return super.view("individual-post");
     }
 
     @GetMapping("/all-posts")
-    public ModelAndView getAllPosts(Model model){
+    public ModelAndView getAllPosts(Model model) {
 
-        List<PostViewDto> posts = this.postService.getAllPosts();
+        final List<PostViewDto> posts = this.postService.getAllPosts();
         model.addAttribute("posts", posts);
 
         return super.view("all-posts");
     }
 
     @GetMapping("/make-post")
-    public ModelAndView getMakePostPage(){
+    public ModelAndView getMakePostPage() {
 
         return super.view("make-post");
     }
@@ -97,7 +99,7 @@ public class PostController extends BaseController{
                                            @AuthenticationPrincipal AppUserDetails userDetails,
                                            @ModelAttribute("postId") UUID postId) {
 
-        Post post = postRepo.getPostById(postId);
+        final Post post = postRepo.getPostById(postId);
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("commentForm", commentForm)
@@ -108,17 +110,23 @@ public class PostController extends BaseController{
         final String username = userDetails.getUsername();
 
         this.commentService.addComment(commentForm, username, post);
-        return super.redirect("/post/"  + postId);
+        return super.redirect("/post/" + postId);
     }
 
+    @PostMapping("/post/like")
+    public ModelAndView likePost(@RequestParam UUID postId) {
+        postService.incrementLikeCount(postId);
+        System.out.println("Post liked successfully");
+        return new ModelAndView("redirect:/post/" + postId);
+    }
 
     @ModelAttribute(name = "postForm")
-    public PostForm getPostForm(){
+    public PostForm getPostForm() {
         return new PostForm();
     }
 
     @ModelAttribute(name = "commentForm")
-    public CommentForm getCommentForm(){
+    public CommentForm getCommentForm() {
         return new CommentForm();
     }
 }

@@ -1,6 +1,5 @@
 package bg.softuni.sweatsmartproject.domain.enums;
 
-
 public enum CategoryEnum {
     HOME_WORKOUTS,
     FITNESS_WORKOUTS,

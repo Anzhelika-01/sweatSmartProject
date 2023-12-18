@@ -1,6 +1,5 @@
 package bg.softuni.sweatsmartproject.services;
 
-import bg.softuni.sweatsmartproject.domain.dto.model.CommentModel;
 import bg.softuni.sweatsmartproject.domain.dto.wrapper.CommentForm;
 import bg.softuni.sweatsmartproject.domain.entity.Comment;
 import bg.softuni.sweatsmartproject.domain.entity.Post;
@@ -17,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -47,21 +45,13 @@ public class CommentServiceTest {
 
     @Test
     void testAddComment() {
-        // Given
-        CommentForm commentForm = new CommentForm();
-        String username = "testUser";
-        Post post = new Post();
+        final CommentForm commentForm = new CommentForm();
+        final String username = "testUser";
+        final Post post = new Post();
 
-        User mockedUser = mock(User.class);
+        final User mockedUser = mock(User.class);
         when(userRepo.findUserByUsername(username)).thenReturn(Optional.of(mockedUser));
 
-        CommentModel commentModel = CommentModel.builder()
-                .id(commentForm.getId())
-                .creationDate(LocalDate.now())
-                .author(mockedUser)
-                .text(commentForm.getText())
-                .post(post)
-                .build();
         when(modelMapper.map(any(), eq(Comment.class))).thenReturn(new Comment());
 
         commentService.addComment(commentForm, username, post);

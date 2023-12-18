@@ -11,6 +11,7 @@ import java.util.Collection;
 @Getter
 public class AppUserDetails extends User {
     private String email;
+
     public AppUserDetails(String username, String password,
                           Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);

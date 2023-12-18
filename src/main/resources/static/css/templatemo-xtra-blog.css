@@ -31,30 +31,32 @@ body {
 button {
     background-color: #00b4d8;
     color: white;
-    padding: 15px 30px; /* Adjust padding for a bigger button */
+    padding: 15px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    white-space: nowrap;
 }
 
 .logo-circle {
     width: 100px;
     height: 100px;
     background-color: white;
-    border-radius: 50%; /* Make the container circular */
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 100px;
 }
 
-/* Style for the logo image inside the circle */
+
 .logo-image {
-    max-width: 80%; /* Adjust the logo size within the circle */
+    max-width: 80%;
     max-height: 80%;
     display: block;
     border-radius: 50%;
@@ -62,8 +64,8 @@ button {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-    gap: 20px; /* Adjust the gap between posts */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .tm-post:target {
@@ -86,7 +88,7 @@ button {
 
 .cutoff-text {
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* Adjust this value to limit to the desired number of lines */
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -102,26 +104,26 @@ button {
 }
 
 .tm-contact-left form {
-    line-height: 2.5; /* Increase the line height for better spacing between lines */
+    line-height: 2.5;
 }
 
 .calculator-container {
     max-width: 1000px;
-    margin: 0 auto; /* Center the container horizontally */
-    text-align: center; /* Center the content inside the container */
+    margin: 0 auto;
+    text-align: center;
     padding: 20px;
-    border: 1px solid #ccc; /* Optional: Add a border for styling */
-    border-radius: 10px; /* Optional: Add border radius for styling */
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 .calculator-container form {
-    display: inline-block; /* Align the form content in a row */
+    display: inline-block;
     text-align: left;
 }
 
 .calculator-container button {
     display: block;
-    margin: 20px auto; /* Center the button horizontally with some margin */
+    margin: 20px auto;
 }
 
 .calories-result {
@@ -130,7 +132,7 @@ button {
     padding: 10px;
     border: 1px solid #0077b6;
     border-radius: 5px;
-    margin-top: 20px; /* Adjust margin as needed */
+    margin-top: 20px;
 }
 
 p, span {
@@ -184,7 +186,6 @@ hr {
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,28 +201,28 @@ hr {
 }
 
 .tm-post {
-    width: 100%; /* Make the post occupy the full width of the container */
-    max-width: 100%; /* Ensure the post doesn't exceed the container width */
-    padding: 20px; /* Add padding to the post for better spacing */
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
     margin-bottom: 30px;
-    border: 1px solid #e0e0e0; /* Add a border for visual separation */
-    border-radius: 5px; /* Add some rounded corners for styling */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    background-color: #f9f9f9; /* Set a background color */
-    height: 0; /* Reset height to zero for maintaining aspect ratio */
-    padding-bottom: 100%; /* Set padding-bottom to create a square based on width */
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    height: 0;
+    padding-bottom: 100%;
 }
 
 .title-input {
-    height: 60px !important;/* Adjust the height as needed */
+    height: 60px !important;
     width: 1000px !important;
-    padding: 15px; /* Add padding for better spacing */
+    padding: 15px;
 }
 
 .text-input {
     width: 1000px !important;
     height: 500px !important;
-    padding: 15px; /* Add padding for better spacing */
+    padding: 15px;
 }
 
 .tm-post h2 {
@@ -229,13 +230,13 @@ hr {
 }
 
 .tm-post p {
-    margin: 0; /* Remove margin for text */
+    margin: 0;
 }
 
 .tm-post-title {
     font-size: 1.7rem;
     font-weight: bold;
-    color: #333; /* Change the color to your preference */
+    color: #333;
     transition: color 0.3s ease;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -353,6 +354,8 @@ ul {
 
 .dropdown {
     position: relative;
+    left: 1000px;
+    height: 100px
 }
 
 .dropbtn {
@@ -364,10 +367,12 @@ ul {
     font-size: 18px;
     border: none;
     cursor: pointer;
+    width: 150px;
+    height: 100px;
 }
 
 .dropdown-content {
-    color: white; /* White text color */
+    color: white;
     transition: color 0.3s;
     display: none;
     position: absolute;
@@ -382,23 +387,18 @@ ul {
 }
 .blue-text {
     color: #ffffff;
-    transition: color 0.3s; /* Add a smooth transition effect */
+    transition: color 0.3s;
     transition-property: color, background-color;
 }
 
-/* Change the text color to blue when the background color is white */
+
 .tm-nav-link:hover .blue-text {
-    color: #016575; /* Blue text color on hover */
+    color: #016575;
 }
 
 .blue-button {
     color: #016575;
-    transition: color 0.3s; /* Add a smooth transition effect */
-}
-
-.tm-search-form {
-    display: flex;
-    align-items: center;
+    transition: color 0.3s;
 }
 
 .form-inline .form-control.tm-search-input {
@@ -408,23 +408,6 @@ ul {
     margin-right: 15px;
     border-color: #00b4d8;
     font-size: 1.2rem;
-}
-
-.tm-search-button {
-    width: 45px;
-    height: 45px;
-    border: none;
-    background-color: #00b4d8;
-    transition: all 0.3s ease;
-}
-
-.tm-search-button:hover {
-    background-color: #00b4d8;
-}
-
-.tm-search-icon {
-    color: white;
-    font-size: 1.3rem;
 }
 
 .tm-post-link {
@@ -485,42 +468,42 @@ ul {
 }
 
 .tm-post-text {
-    font-size: 20px; /* Adjust the font size as needed */
-    line-height: 1.6; /* Adjust the line height for better readability */
+    font-size: 20px;
+    line-height: 1.6;
     margin-bottom: 50px;
-    color: #3c3232; /* Choose a comfortable text color */
-    text-align: left; /* Justify text for better legibility */
+    color: #3c3232;
+    text-align: left;
     width: 1000px;
 }
 
 .tm-post-text a {
-    color: #007BFF; /* Link color */
-    text-decoration: underline; /* Underline links */
-    transition: color 0.2s; /* Smooth color transition on hover */
+    color: #007BFF;
+    text-decoration: underline;
+    transition: color 0.2s;
 }
 
 .tm-post-text a:hover {
-    color: #0056b3; /* Change link color on hover */
+    color: #0056b3;
 }
 
 .tm-post-text p {
-    margin-bottom: 15px; /* Add space between paragraphs */
+    margin-bottom: 15px;
 }
 
-/* Style blockquotes for quotes in the text */
+
 .tm-post-text blockquote {
-    background: #f9f9f9; /* Background color for blockquotes */
-    border-left: 4px solid #007BFF; /* Left border for quotes */
-    padding: 10px; /* Spacing inside blockquotes */
-    margin: 15px 0; /* Add space above and below blockquotes */
-    color: #666; /* Text color within blockquotes */
+    background: #f9f9f9;
+    border-left: 4px solid #007BFF;
+    padding: 10px;
+    margin: 15px 0;
+    color: #666;
 }
 
-/* Style images within the post text */
+
 .tm-post-text img {
-    max-width: 100%; /* Ensure images don't overflow their container */
-    display: block; /* Center images within their container */
-    margin: 15px 0; /* Add space above and below images */
+    max-width: 100%;
+    display: block;
+    margin: 15px 0;
 }
 
 .tm-h3 {
@@ -611,7 +594,7 @@ ul {
     text-align: right;
 }
 
-/* Single Post page */
+
 hr.tm-hr-primary {
     border-top: 5px solid #00b4d8;
 }
@@ -648,56 +631,56 @@ video {
 }
 
 .category-dropdown {
-    width: 100%; /* Make the dropdown full-width */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     font-size: 16px;
     line-height: 1.5;
-    color: #333; /* Text color */
-    background-color: #fff; /* Background color */
+    color: #333;
+    background-color: #fff;
     border-radius: 5px;
     transition: border-color 0.3s, color 0.3s, background-color 0.3s;
 }
 
 .category-dropdown:focus {
     outline: none;
-    border-color: #007BFF; /* Highlight border on focus */
-    color: #333; /* Maintain text color on focus */
+    border-color: #007BFF;
+    color: #333;
 }
 
-/* Style the category label */
+
 .category-label {
     font-weight: bold;
-    color: #333; /* Text color */
+    color: #333;
     font-size: 16px;
     margin-right: 10px;
 }
 
-/* Style the category dropdown options */
+
 .category-option {
-    background-color: #fff; /* Background color for options */
-    color: #333; /* Text color for options */
+    background-color: #fff;
+    color: #333;
 }
 
-/* Apply hover effect to the dropdown options */
+
 .category-option:hover {
-    background-color: #f5f5f5; /* Background color on hover */
+    background-color: #f5f5f5;
 }
 
-/* Style the dropdown arrow icon */
+
 .category-dropdown::-ms-expand {
-    display: none; /* Hide the default arrow in Microsoft browsers */
+    display: none;
 }
 
-/* Style the dropdown arrow icon for other browsers */
+
 .category-dropdown::after {
-    content: "▼"; /* Custom dropdown arrow */
+    content: "▼";
     position: absolute;
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
     font-size: 12px;
-    color: #333; /* Arrow color */
+    color: #333;
 }
 
 figure {
@@ -913,17 +896,17 @@ a:hover figcaption {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start; /* Align items to the start (left side) */
+    justify-content: flex-start;
 }
 
 .tm-form-label {
     font-weight: bold;
     margin-right: 10px;
-    white-space: nowrap; /* Prevent label text from wrapping */
+    white-space: nowrap;
 }
 
 .tm-input-wrapper {
-    flex: 1; /* Expand input wrapper to fill available space */
+    flex: 1;
 }
 
 .tm-input {
@@ -1014,7 +997,7 @@ button:hover {
     }
 }
 
-/* Hide sidebar */
+
 @media (max-width: 991px) {
     .tm-header {
         width: 320px;

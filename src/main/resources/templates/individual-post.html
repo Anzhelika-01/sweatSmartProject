@@ -16,11 +16,16 @@
                 <p class="tm-post-text" th:text="${post.text}">Post content goes here</p>
 
                 <div class="like-section">
-                    <button class="like-button" onclick="likePost(this)">❤</button>
-                    <span class="like-count">0</span>
+                    <form th:action="@{/post/like}" method="POST">
+                        <input type="hidden" name="postId" th:value="${post.id}"/>
+                        <button type="submit" class="like-button">❤</button>
+                    </form>
+                    <span class="like-count" th:text="${post.likes}"></span>
+                    <span th:if="${post.likes == 1}"> like</span>
+                    <span th:if="${post.likes != 1}"> likes</span>
                 </div>
 
-                <!-- Comments section -->
+
                 <div th:if="${comments != null and not #lists.isEmpty(comments)}">
                     <div th:each="comment : ${comments}">
                         <div>
@@ -51,16 +56,6 @@
 <footer th:replace="~{/fragments/footer}"></footer>
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/templatemo-script.js}"></script>
-
-<script>
-    function likePost(button) {
-        var likeCountElement = button.nextElementSibling;
-
-        var currentLikes = parseInt(likeCountElement.innerText);
-
-        likeCountElement.innerText = currentLikes + 1;
-    }
-</script>
 
 </body>
 </html>

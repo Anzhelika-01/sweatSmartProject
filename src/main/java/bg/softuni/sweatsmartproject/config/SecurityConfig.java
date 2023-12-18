@@ -30,29 +30,29 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            SecurityContextRepository securityContextRepository) throws Exception {
         http.
-                // defines which pages will be authorized
-                        authorizeHttpRequests().
-                // allow access to all static files (images, CSS, js)
-                        requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                // the URL-s below are available for all users - logged in and anonymous
-                        requestMatchers("/", "/login", "/register", "/post",
-                        "/contact", "/calorie-calculator", "/about", "/login-error").permitAll().
-                // only for admins
-                        requestMatchers("/admins").hasRole(RoleEnum.ADMIN.name()).
-                        requestMatchers("/make-post").authenticated().
+
+                authorizeHttpRequests().
+
+                requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+
+                requestMatchers("/", "/login", "/register", "/post",
+                        "/contact", "/calorie-calculator", "/about", "/login-error", "/all-posts").permitAll().
+
+                requestMatchers("/admins").hasRole(RoleEnum.ADMIN.name()).
+                requestMatchers("/make-post").authenticated().
 
                 anyRequest().authenticated().
                 and().
-                // configure login with HTML form
-                        formLogin().
+
+                formLogin().
                 loginPage("/login").
-                // the names of the username, password input fields in the custom login form
-                        usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
+
+                usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
                 passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-                // where do we go after login
-                        defaultSuccessUrl("/", true).//use true argument if you always want to go there, otherwise go to previous page
+
+                defaultSuccessUrl("/", true).
                 failureForwardUrl("/login-error").
-                and().logout().//configure logout
+                and().logout().
                 logoutUrl("/logout").
                 logoutSuccessUrl("/").
                 deleteCookies("JSESSIONID").
@@ -84,7 +84,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/static/", "classpath:/public/"};
 
 
     @Override
@@ -92,5 +92,4 @@ public class SecurityConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
     }
-
 }

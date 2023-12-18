@@ -19,8 +19,9 @@ public class PostForm {
     private String category;
 
     @NotNull
-    @Size(min = 10, max = 5000)
     private String text;
+
+    private int likes;
 
     public String getCategory() {
         return category;

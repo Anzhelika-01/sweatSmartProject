@@ -43,10 +43,11 @@
                     <div class="form-group row mb-5">
                         <label for="title" class="col-sm-3 col-form-label text-right tm-color-primary">Title</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control mr-0 ml-auto title-input" name="title" id="title" rows="2" placeholder="For what you will talk..." th:value="${title}"></textarea>
+                            <textarea class="form-control mr-0 ml-auto title-input" name="title" id="title" rows="2"
+                                      placeholder="For what you will talk..." th:value="${title}"></textarea>
                         </div>
 
-                    <p th:if="${#fields.hasErrors('title')}"
+                        <p th:if="${#fields.hasErrors('title')}"
                            class="errors alert alert-danger">
                             Title is required.
                         </p>
@@ -55,7 +56,8 @@
                     <div class="form-group row mb-5">
                         <label for="text" class="col-sm-3 col-form-label text-right tm-color-primary">Post</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control mr-0 ml-auto text-input" name="text" id="text" rows="20" placeholder="Share your knowledge with us..." th:value="${text}"></textarea>
+                            <textarea class="form-control mr-0 ml-auto text-input" name="text" id="text" rows="20"
+                                      placeholder="Share your knowledge with us..." th:value="${text}"></textarea>
                         </div>
 
                         <p th:if="${#fields.hasErrors('text')}"

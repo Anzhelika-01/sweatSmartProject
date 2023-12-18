@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 public class CategoryModel {
 
-   private UUID id;
+    private UUID id;
 
-   private CategoryEnum name;
+    private CategoryEnum name;
 }

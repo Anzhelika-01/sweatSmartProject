@@ -9,15 +9,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class HomeController extends BaseController{
+public class HomeController extends BaseController {
 
     @GetMapping
-    public ModelAndView getHome(){
+    public ModelAndView getHome() {
         return super.view("index");
     }
 
     @GetMapping("index")
-    public ModelAndView getIndex(){
+    public ModelAndView getIndex() {
         return super.view("index");
     }
 }

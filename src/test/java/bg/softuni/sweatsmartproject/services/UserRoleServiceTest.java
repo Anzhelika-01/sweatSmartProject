@@ -42,70 +42,57 @@ public class UserRoleServiceTest {
 
     @Test
     public void testIsDbInitWhenCountGreaterThanZero() {
-        // Arrange
-        when(userRoleRepo.count()).thenReturn(1L); // Set the desired count value
+        when(userRoleRepo.count()).thenReturn(1L);
 
-        // Act
         boolean result = userRoleService.isDbInit();
 
-        // Assert
         assertTrue(result);
-        verify(userRoleRepo, times(1)).count(); // Verify that the count method is called once
+        verify(userRoleRepo, times(1)).count();
     }
 
     @Test
     public void testIsDbInitWhenCountIsZero() {
-        // Arrange
-        when(userRoleRepo.count()).thenReturn(0L); // Set the desired count value
+        when(userRoleRepo.count()).thenReturn(0L);
 
-        // Act
         boolean result = userRoleService.isDbInit();
 
-        // Assert
         assertFalse(result);
-        verify(userRoleRepo, times(1)).count(); // Verify that the count method is called once
+        verify(userRoleRepo, times(1)).count();
     }
 
     @Test
     public void testDbInitWhenDatabaseNotInitialized() {
-        // Arrange
-        when(userRoleRepo.count()).thenReturn(0L); // Simulate database not initialized
+        when(userRoleRepo.count()).thenReturn(0L);
 
-        // Act
         userRoleService.dbInit();
 
-        // Assert
-        verify(userRoleRepo, times(1)).saveAllAndFlush(anyList()); // Verify that saveAllAndFlush is called
+        verify(userRoleRepo, times(1)).saveAllAndFlush(anyList());
     }
 
     @Test
     public void testDbInitWhenDatabaseAlreadyInitialized() {
-        // Arrange
-        when(userRoleRepo.count()).thenReturn(2L); // Simulate database already initialized
+        when(userRoleRepo.count()).thenReturn(2L);
 
-        // Act
         userRoleService.dbInit();
 
-        // Assert
-        verify(userRoleRepo, never()).saveAllAndFlush(anyList()); // Verify that saveAllAndFlush is not called
+        verify(userRoleRepo, never()).saveAllAndFlush(anyList());
     }
 
 
     @Test
     public void testGetAllUserRolesAfterInitialization() {
-        // Arrange
-        UserRole userRole1 = new UserRole().setRole(RoleEnum.USER);
-        UserRole userRole2 = new UserRole().setRole(RoleEnum.ADMIN);
+        final UserRole userRole1 = new UserRole().setRole(RoleEnum.USER);
+        final UserRole userRole2 = new UserRole().setRole(RoleEnum.ADMIN);
 
         when(userRoleRepo.findAll()).thenReturn(Arrays.asList(userRole1, userRole2));
 
-        UserRoleViewDto dto1 = new UserRoleViewDto();
-        UserRoleViewDto dto2 = new UserRoleViewDto();
+        final UserRoleViewDto dto1 = new UserRoleViewDto();
+        final UserRoleViewDto dto2 = new UserRoleViewDto();
 
         when(modelMapper.map(userRole1, UserRoleViewDto.class)).thenReturn(dto1);
         when(modelMapper.map(userRole2, UserRoleViewDto.class)).thenReturn(dto2);
 
-        List<UserRoleViewDto> result = userRoleService.getAll();
+        final List<UserRoleViewDto> result = userRoleService.getAll();
 
         assertNotNull(result);
         assertEquals(2, result.size());
@@ -115,56 +102,47 @@ public class UserRoleServiceTest {
 
     @Test
     public void testFindRoleByNameWithUser() {
-        // Arrange
-        String roleName = "USER";
-        UserRole userRole = new UserRole().setRole(RoleEnum.USER);
+        final String roleName = "USER";
+        final UserRole userRole = new UserRole().setRole(RoleEnum.USER);
 
         when(userRoleRepo.findByRole(RoleEnum.USER)).thenReturn(userRole);
 
-        UserRoleModel expectedModel = new UserRoleModel(); // Assuming you have a proper UserRoleModel setup
+        final UserRoleModel expectedModel = new UserRoleModel();
         when(modelMapper.map(userRole, UserRoleModel.class)).thenReturn(expectedModel);
 
-        // Act
-        UserRoleModel result = userRoleService.findRoleByName(roleName);
+        final UserRoleModel result = userRoleService.findRoleByName(roleName);
 
-        // Assert
         assertNotNull(result);
-        assertSame(expectedModel, result); // Verify that the expected UserRoleModel is returned
+        assertSame(expectedModel, result);
     }
 
     @Test
     public void testFindRoleByNameWithAdmin() {
-        // Arrange
-        String roleName = "ADMIN";
-        UserRole adminRole = new UserRole().setRole(RoleEnum.ADMIN);
+        final String roleName = "ADMIN";
+        final UserRole adminRole = new UserRole().setRole(RoleEnum.ADMIN);
 
         when(userRoleRepo.findByRole(RoleEnum.ADMIN)).thenReturn(adminRole);
 
-        UserRoleModel expectedModel = new UserRoleModel(); // Assuming you have a proper UserRoleModel setup
+        final UserRoleModel expectedModel = new UserRoleModel();
         when(modelMapper.map(adminRole, UserRoleModel.class)).thenReturn(expectedModel);
 
-        // Act
-        UserRoleModel result = userRoleService.findRoleByName(roleName);
+        final UserRoleModel result = userRoleService.findRoleByName(roleName);
 
-        // Assert
         assertNotNull(result);
-        assertSame(expectedModel, result); // Verify that the expected UserRoleModel is returned
+        assertSame(expectedModel, result);
     }
 
     @Test
     public void testSetToUser() {
-        // Arrange
-        UserRole userRole = new UserRole().setRole(RoleEnum.USER);
+        final UserRole userRole = new UserRole().setRole(RoleEnum.USER);
         when(userRoleRepo.findByRole(RoleEnum.USER)).thenReturn(userRole);
 
-        UserRoleModel expectedModel = new UserRoleModel(); // Assuming you have a proper UserRoleModel setup
+        final UserRoleModel expectedModel = new UserRoleModel();
         when(modelMapper.map(userRole, UserRoleModel.class)).thenReturn(expectedModel);
 
-        // Act
-        UserRoleModel result = userRoleService.setToUser();
+        final UserRoleModel result = userRoleService.setToUser();
 
-        // Assert
         assertNotNull(result);
-        assertSame(expectedModel, result); // Verify that the expected UserRoleModel is returned
+        assertSame(expectedModel, result);
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "categories")
-public class Category extends BaseEntity{
+public class Category extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -16,8 +16,7 @@ public class Category extends BaseEntity{
         return this;
     }
 
-    public CategoryEnum getName()
-    {
+    public CategoryEnum getName() {
         return name;
     }
 }

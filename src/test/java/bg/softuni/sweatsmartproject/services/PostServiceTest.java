@@ -54,21 +54,20 @@ public class PostServiceTest {
 
     @Test
     void testMakePost() {
-        // Arrange
-        UUID postId = UUID.randomUUID();
+        final UUID postId = UUID.randomUUID();
 
-        PostForm postForm = new PostForm()
+        final PostForm postForm = new PostForm()
                 .setId(postId)
                 .setTitle("Test Title")
                 .setCategory("FITNESS_WORKOUTS")
                 .setText("Test Text 123");
 
-        String username = "testUser";
+        final String username = "testUser";
 
-        User mockUser = new User();
+        final User mockUser = new User();
         when(userRepo.findUserByUsername(username)).thenReturn(Optional.of(mockUser));
 
-        UUID categoryId = UUID.randomUUID();
+        final UUID categoryId = UUID.randomUUID();
         when(categoryService.getCategory(any())).thenReturn(CategoryModel.builder().id(categoryId).name(CategoryEnum.FITNESS_WORKOUTS).build());
 
         when(modelMapper.map(any(), eq(Post.class))).thenReturn(new Post());
@@ -83,15 +82,15 @@ public class PostServiceTest {
     @Test
     void testGetAllPosts() {
 
-        Category mockCategory = new Category();
+        final Category mockCategory = new Category();
         mockCategory.setId(UUID.randomUUID());
         mockCategory.setName(CategoryEnum.FITNESS_WORKOUTS);
 
-        User mockUser = new User();
+        final User mockUser = new User();
         mockUser.setId(UUID.randomUUID());
         mockUser.setUsername("MockUser");
 
-        Post mockPost = new Post();
+        final Post mockPost = new Post();
         mockPost.setId(UUID.randomUUID());
         mockPost.setTitle("Mock Title");
         mockPost.setCategory(mockCategory);
@@ -101,7 +100,7 @@ public class PostServiceTest {
 
         when(postRepo.findAll()).thenReturn(Collections.singletonList(mockPost));
 
-        PostViewDto expectedPostViewDto = new PostViewDto();
+        final PostViewDto expectedPostViewDto = new PostViewDto();
         expectedPostViewDto.setId(mockPost.getId());
         expectedPostViewDto.setTitle(mockPost.getTitle());
         expectedPostViewDto.setCategory(mockCategory.getName().toString());
@@ -109,13 +108,10 @@ public class PostServiceTest {
         expectedPostViewDto.setCreationDate(mockPost.getCreationDate());
         expectedPostViewDto.setAuthor(mockUser.getUsername());
 
-        List<PostViewDto> result = postService.getAllPosts();
+        final List<PostViewDto> result = postService.getAllPosts();
 
-        // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
-        System.out.println("Result: " + result);
-        System.out.println("Expected: " + expectedPostViewDto);
 
         assertTrue(result.stream().anyMatch(dto ->
                 Objects.equals(dto.getId(), expectedPostViewDto.getId()) &&

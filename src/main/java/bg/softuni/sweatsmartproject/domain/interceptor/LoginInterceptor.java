@@ -15,7 +15,6 @@ public class LoginInterceptor extends GlobalExceptionHandler implements HandlerI
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // Log the incoming request information
         logger.info("Request URL: {}", request.getRequestURL());
         logger.info("Request method: {}", request.getMethod());
 

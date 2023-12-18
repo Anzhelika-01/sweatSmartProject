@@ -48,13 +48,13 @@
                             </td>
                             <td>
                                 <form th:action="@{/admins/add-role}" method="post">
-                                    <input type="hidden" name="userId" th:value="${user.id}" />
+                                    <input type="hidden" name="userId" th:value="${user.id}"/>
                                     <button type="submit" name="role" value="ADMIN">Add Admin Role</button>
                                 </form>
                             </td>
                             <td>
                                 <form th:action="@{/admins/delete-role}" method="post">
-                                    <input type="hidden" name="userId" th:value="${user.id}" />
+                                    <input type="hidden" name="userId" th:value="${user.id}"/>
                                     <button type="submit" name="role" value="ADMIN">Delete Admin Role</button>
                                 </form>
                             </td>

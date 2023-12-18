@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/contact")
-public class ContactController extends BaseController{
+public class ContactController extends BaseController {
 
     private final MessageService messageService;
 
@@ -23,7 +23,7 @@ public class ContactController extends BaseController{
     }
 
     @GetMapping
-    public ModelAndView getContact(){
+    public ModelAndView getContact() {
         return super.view("contact");
     }
 
@@ -41,7 +41,7 @@ public class ContactController extends BaseController{
     }
 
     @ModelAttribute(name = "messageModel")
-    public MessageModel getMessage(){
+    public MessageModel getMessage() {
         return new MessageModel();
     }
 }

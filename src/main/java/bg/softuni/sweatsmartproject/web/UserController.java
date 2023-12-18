@@ -1,18 +1,12 @@
 package bg.softuni.sweatsmartproject.web;
 
-import bg.softuni.sweatsmartproject.domain.dto.model.AppUserDetails;
-import bg.softuni.sweatsmartproject.domain.dto.model.UserModel;
-import bg.softuni.sweatsmartproject.domain.dto.view.UserRoleViewDto;
 import bg.softuni.sweatsmartproject.domain.dto.wrapper.UserRegisterForm;
-import bg.softuni.sweatsmartproject.service.UserRoleService;
 import bg.softuni.sweatsmartproject.service.UserService;
 import bg.softuni.sweatsmartproject.validation.UserRegisterValidator;
-import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
@@ -23,15 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.UUID;
-
 @Controller
-public class UserController extends BaseController{
+public class UserController extends BaseController {
     private final UserService userService;
     private final UserRegisterValidator userRegisterValidator;
     private final SecurityContextRepository securityContextRepository;
@@ -46,14 +36,14 @@ public class UserController extends BaseController{
     }
 
     @GetMapping("/register")
-    public ModelAndView getRegister(){
+    public ModelAndView getRegister() {
         return super.view("register");
     }
 
     @PostMapping("/register")
     public ModelAndView postRegister(@Valid @ModelAttribute(name = "registerForm") UserRegisterForm registerForm,
-                               BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request,
-                                     HttpServletResponse response){
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request,
+                                     HttpServletResponse response) {
 
         this.userRegisterValidator.validate(registerForm, bindingResult);
 
@@ -64,7 +54,7 @@ public class UserController extends BaseController{
             return super.view("register");
         }
 
-        this.userService.registerUser(registerForm,  successfulAuth -> {
+        this.userService.registerUser(registerForm, successfulAuth -> {
             final SecurityContextHolderStrategy strategy = SecurityContextHolder.getContextHolderStrategy();
 
             final SecurityContext context = strategy.createEmptyContext();
@@ -79,7 +69,7 @@ public class UserController extends BaseController{
     }
 
     @GetMapping("/login")
-    public ModelAndView getLogin(){
+    public ModelAndView getLogin() {
         return super.view("login");
     }
 
@@ -96,7 +86,7 @@ public class UserController extends BaseController{
     }
 
     @ModelAttribute(name = "registerForm")
-    public UserRegisterForm getRegisterForm(){
+    public UserRegisterForm getRegisterForm() {
         return new UserRegisterForm();
     }
 }

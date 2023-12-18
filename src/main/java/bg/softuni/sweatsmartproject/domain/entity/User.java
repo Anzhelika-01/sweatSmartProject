@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     @NotEmpty(message = "Name could not be empty or null.")
     @Size(min = 6, max = 100, message = "Name must contains min 36 or max 100 characters.")

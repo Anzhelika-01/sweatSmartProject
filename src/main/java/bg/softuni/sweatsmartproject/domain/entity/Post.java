@@ -12,7 +12,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "posts")
-public class Post extends BaseEntity{
+public class Post extends BaseEntity {
 
     @Column
     private String title;
@@ -22,6 +22,9 @@ public class Post extends BaseEntity{
 
     @Column(name = "creation_date")
     private LocalDate creationDate;
+
+    @Column
+    private int likes;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private Category category;
@@ -71,6 +74,15 @@ public class Post extends BaseEntity{
     public Post setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    public Post setLikes(int likes) {
+        this.likes = likes;
+        return this;
+    }
+
+    public int getLikes() {
+        return likes;
     }
 
     @Override

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class CalorieCalculatorController extends BaseController{
+public class CalorieCalculatorController extends BaseController {
 
     private final CalorieCalculatorService calorieCalculator;
 
@@ -32,8 +32,8 @@ public class CalorieCalculatorController extends BaseController{
 
     @PostMapping("/calorie-calculator")
     public ModelAndView calculateCalories(@Valid @ModelAttribute(name = "calorieCalculatorForm") CalorieCalculatorForm calorieCalculatorForm,
-                                    BindingResult result, RedirectAttributes redirectAttributes,
-                                    Model model) {
+                                          BindingResult result, RedirectAttributes redirectAttributes,
+                                          Model model) {
 
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("calorieCalculatorForm", calorieCalculatorForm)

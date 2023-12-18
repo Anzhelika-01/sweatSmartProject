@@ -8,6 +8,7 @@ import bg.softuni.sweatsmartproject.domain.entity.Post;
 import bg.softuni.sweatsmartproject.domain.entity.User;
 import bg.softuni.sweatsmartproject.repository.PostRepo;
 import bg.softuni.sweatsmartproject.repository.UserRepo;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +55,15 @@ public class PostService {
         final Post post = this.modelMapper.map(postModel, Post.class);
 
         this.postRepo.saveAndFlush(post);
+    }
+
+    public void incrementLikeCount(UUID postId) {
+        final Post post = postRepo.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + postId));
+
+        post.setLikes(post.getLikes() + 1);
+
+        postRepo.save(post);
     }
 
     public List<PostViewDto> getAllPosts() {

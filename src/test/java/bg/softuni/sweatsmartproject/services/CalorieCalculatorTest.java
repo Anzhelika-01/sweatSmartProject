@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class CalorieCalculatorTest {
 
-    private CalorieCalculatorService calorieCalculatorService = new CalorieCalculatorService();
+    private final CalorieCalculatorService calorieCalculatorService = new CalorieCalculatorService();
 
     @Before
     public void setup() {
@@ -24,12 +24,12 @@ class CalorieCalculatorTest {
     @Test
     void testCalculateCaloriesForMale() {
         double result = calorieCalculatorService.calculateCalories("M", 70.0, 175.0, 30, "Moderately active");
-        assertEquals(2628, result); // You might need to adjust the expected value based on your specific calculations.
+        assertEquals(2628, result);
     }
 
     @Test
     void testCalculateCaloriesForFemale() {
         double result = calorieCalculatorService.calculateCalories("F", 60.0, 160.0, 25, "Very active");
-        assertEquals(2397, result); // Adjust the expected value based on your specific calculations.
+        assertEquals(2397, result);
     }
 }

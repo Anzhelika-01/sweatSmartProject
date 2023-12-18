@@ -8,9 +8,6 @@ import bg.softuni.sweatsmartproject.domain.entity.User;
 import bg.softuni.sweatsmartproject.domain.entity.UserRole;
 import bg.softuni.sweatsmartproject.domain.enums.RoleEnum;
 import bg.softuni.sweatsmartproject.repository.UserRepo;
-import bg.softuni.sweatsmartproject.repository.UserRoleRepo;
-import bg.softuni.sweatsmartproject.service.ApplicationUserDetailsService;
-import bg.softuni.sweatsmartproject.service.DataInitializerService;
 import bg.softuni.sweatsmartproject.service.UserRoleService;
 import bg.softuni.sweatsmartproject.service.UserService;
 import org.junit.Before;
@@ -20,7 +17,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -76,10 +72,6 @@ public class UserServiceTest {
         registerForm.setEmail("test@example.com");
         registerForm.setPassword("testPassword");
 
-        final UserRoleModel userRoleModel = new UserRoleModel();
-        userRoleModel.setId(UUID.randomUUID());
-        userRoleModel.setRole("USER");
-
         final User user = new User();
         user.setUsername("testUser");
         user.setEmail("test@example.com");
@@ -89,20 +81,21 @@ public class UserServiceTest {
         roleModel.setRole(RoleEnum.USER.name());
 
         when(userRoleService.setToUser()).thenReturn(roleModel);
-        when(modelMapper.map(any(UserModel.class),eq(User.class))).thenReturn(user);
+        when(modelMapper.map(any(UserModel.class), eq(User.class))).thenReturn(user);
         when(passwordEncoder.encode(any(String.class))).thenReturn("testPassword");
 
         when(userDetailsService.loadUserByUsername(anyString())).thenReturn(
                 new org.springframework.security.core.userdetails.User("testUser", "encodedPassword", Collections.emptyList())
         );
 
-        userService.registerUser(registerForm, authentication -> {});
+        userService.registerUser(registerForm, authentication -> {
+        });
 
         verify(userRoleService, times(1)).setToUser();
         verify(userDetailsService, times(1)).loadUserByUsername(registerForm.getUsername());
         verify(userRepo, times(1)).saveAndFlush(userArgumentCaptor.capture());
 
-        final User savedUser =  userArgumentCaptor.getValue();
+        final User savedUser = userArgumentCaptor.getValue();
         assertEquals(registerForm.getUsername(), savedUser.getUsername());
         assertEquals(registerForm.getEmail(), savedUser.getEmail());
         assertEquals(registerForm.getPassword(), savedUser.getPassword());
@@ -113,7 +106,7 @@ public class UserServiceTest {
         final String username = "newUsername";
         final UserModel userModel = new UserModel();
         final User user = new User();
-        Authentication authentication = mock(Authentication.class);
+        final Authentication authentication = mock(Authentication.class);
         when(userRepo.findUserByUsername(username)).thenReturn(Optional.empty());
         when(userDetailsService.loadUserByUsername("newUsername")).thenReturn(userDetails);
         when(userDetails.getPassword()).thenReturn("password");
@@ -149,13 +142,8 @@ public class UserServiceTest {
         when(userRepo.saveAndFlush(any())).thenReturn(user);
         when(userRoleService.findRoleByName(any())).thenReturn(newRole);
 
-        // Act
         userService.changeRoles(userModel, RoleEnum.ADMIN.name(), true);
 
-// Print or log a message to confirm that the method was called
-        System.out.println("changeRoles method called");
-
-// Assert
         verify(userRepo, times(1)).saveAndFlush(any());
     }
 
@@ -182,7 +170,6 @@ public class UserServiceTest {
 
     @Test
     public void testGetAllUsers() {
-        // Arrange
         final User user1 = new User().setUsername("user1").setEmail("user1@example.com").setPassword("password1");
         final User user2 = new User().setUsername("user2").setEmail("user2@example.com").setPassword("password2");
         final List<User> userList = Arrays.asList(user1, user2);
@@ -230,7 +217,6 @@ public class UserServiceTest {
 
     @Test
     void testFindById() {
-        // Arrange
         final UUID userId = UUID.randomUUID();
         final User mockUser = new User();
         mockUser.setId(userId);
@@ -245,7 +231,6 @@ public class UserServiceTest {
 
         final UserModel resultUserModel = userService.findById(userId);
 
-        // Assert
         assertEquals(expectedUserModel.getId(), resultUserModel.getId());
         assertEquals(expectedUserModel.getUsername(), resultUserModel.getUsername());
     }

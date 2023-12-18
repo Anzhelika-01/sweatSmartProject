@@ -35,32 +35,36 @@
                       th:method="POST"
                       th:object="${messageModel}"
 
-                       class="mb-5 ml-auto mr-0 tm-contact-form">
+                      class="mb-5 ml-auto mr-0 tm-contact-form">
                     <div class="form-group tm-form-group">
                         <label for="name" class="tm-form-label">Name</label>
                         <div class="tm-input-wrapper">
-                            <input class="form-control tm-input" name="name" id="name" type="text" th:value="${name}" required>
+                            <input class="form-control tm-input" name="name" id="name" type="text" th:value="${name}"
+                                   required>
                         </div>
                     </div>
 
                     <div class="form-group tm-form-group">
                         <label for="email" class="tm-form-label">Email</label>
                         <div class="tm-input-wrapper">
-                            <input class="form-control tm-input" name="email" id="email" type="email" th:value="${email}" required>
+                            <input class="form-control tm-input" name="email" id="email" type="email"
+                                   th:value="${email}" required>
                         </div>
                     </div>
 
                     <div class="form-group tm-form-group">
                         <label for="subject" class="tm-form-label">Subject</label>
                         <div class="tm-input-wrapper">
-                            <input class="form-control tm-input" name="subject" id="subject" type="text" th:value="${subject}" required>
+                            <input class="form-control tm-input" name="subject" id="subject" type="text"
+                                   th:value="${subject}" required>
                         </div>
                     </div>
 
                     <div class="form-group tm-form-group">
                         <label for="message" class="tm-form-label">Message</label>
                         <div class="tm-input-wrapper">
-                            <textarea class="form-control tm-input" name="message" id="message" rows="8" th:field="*{message}" required></textarea>
+                            <textarea class="form-control tm-input" name="message" id="message" rows="8"
+                                      th:field="*{message}" required></textarea>
                         </div>
                     </div>
                     <div th:if="${successMessage}" class="alert alert-success">

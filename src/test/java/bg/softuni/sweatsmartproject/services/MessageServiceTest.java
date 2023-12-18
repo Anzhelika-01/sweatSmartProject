@@ -29,8 +29,8 @@ public class MessageServiceTest {
     @Test
     void testAddMessage() {
 
-        MessageModel messageModel = new MessageModel();
-        Message mappedMessage = new Message();
+        final MessageModel messageModel = new MessageModel();
+        final Message mappedMessage = new Message();
 
         Mockito.when(modelMapper.map(messageModel, Message.class)).thenReturn(mappedMessage);
 

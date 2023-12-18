@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "roles")
-public class UserRole extends BaseEntity{
+public class UserRole extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleEnum role;

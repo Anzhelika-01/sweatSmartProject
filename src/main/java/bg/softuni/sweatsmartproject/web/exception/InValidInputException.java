@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class InValidInputException extends RuntimeException{
-        String message;
+public class InValidInputException extends RuntimeException {
+    String message;
 }
