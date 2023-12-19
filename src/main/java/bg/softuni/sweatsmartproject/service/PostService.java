@@ -62,8 +62,6 @@ public class PostService {
         final Post post = postRepo.findById(postId)
                 .orElseThrow(() -> new RuntimeException("Post not found with id: " + postId));
 
-        System.out.println(userLikedPost(postId, user));
-
         if (!userLikedPost(postId, user)) {
             post.addLike(user);
         } else {
