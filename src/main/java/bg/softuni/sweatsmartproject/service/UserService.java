@@ -60,10 +60,18 @@ public class UserService {
         if (this.userRepo.findUserByUsername(username).isPresent() || username.trim().isEmpty() || username.length() < 3) {
             return false;
         }
+
         final User userToChange = this.modelMapper.map(userModel, User.class);
         userToChange.setUsername(username);
         this.userRepo.saveAndFlush(userToChange);
-        SecurityContextHolder.getContext().setAuthentication(this.getAuthenticationToken(username));
+
+        UserDetails updatedUserDetails = this.userDetailsService.loadUserByUsername(username);
+        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
+                updatedUserDetails, updatedUserDetails.getPassword(), updatedUserDetails.getAuthorities());
+
+        SecurityContextHolder.clearContext();
+        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
         return true;
     }
 

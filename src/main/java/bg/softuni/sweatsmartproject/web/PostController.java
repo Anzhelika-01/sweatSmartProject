@@ -53,6 +53,7 @@ public class PostController extends BaseController {
     @GetMapping("/post/{postId}")
     public ModelAndView viewPost(@PathVariable UUID postId, Model model) {
         final Post post = postRepo.getPostById(postId);
+
         model.addAttribute("post", post);
 
         final List<CommentsViewDto> comments = commentService.getAllComments(post.getTitle());

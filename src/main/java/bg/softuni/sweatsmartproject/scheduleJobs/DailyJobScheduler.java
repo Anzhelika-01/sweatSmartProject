@@ -28,19 +28,25 @@ public class DailyJobScheduler {
     @Async
     @Scheduled(cron = "0 0 0 * * *")
     public void runDailyJob() {
-
-        List<User> users = userService.getAllUsers();
-
-        for (User user : users) {
-            sendEmail(user.getEmail());
+        try {
+            List<User> users = userService.getAllUsers();
+            for (User user : users) {
+                sendEmail(user.getEmail());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private void sendEmail(String to) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("Daily Update");
-        message.setText("Don't forget to track your daily caloric intake!");
-        mailSender.send(message);
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject("Daily Update");
+            message.setText("Don't forget to track your daily caloric intake!");
+            mailSender.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
